@@ -963,6 +963,8 @@ $(eval $(call assert_numerics,\
         ARM_ARCH_MINOR \
         BRANCH_PROTECTION \
         FW_ENC_STATUS \
+	NR_OF_FW_BANKS \
+	NR_OF_IMAGES_IN_FW_BANK \
 )))
 
 ifdef KEY_SIZE
@@ -1049,6 +1051,8 @@ $(eval $(call add_defines,\
         USE_SP804_TIMER \
         ENABLE_FEAT_RNG \
         ENABLE_FEAT_SB \
+	NR_OF_FW_BANKS \
+	NR_OF_IMAGES_IN_FW_BANK \
 )))
 
 ifeq (${SANITIZE_UB},trap)
