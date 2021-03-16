@@ -851,6 +851,17 @@ commands can be used:
     # Resume execution
     continue
 
+Firmware update options
+-----------------------
+
+-  ``NR_OF_FW_BANKS``:  Define the number of firmware banks. This flag is used
+   in defining the firmware update metadata structure. This flag is by default
+   set to '2'.
+
+-  ``NR_OF_IMAGES_IN_FW_BANK``: Define the number of firmware images in each
+   firmware bank. This flag is used in defining the firmware update metadata
+   structure. This flag is by default set to '1'.
+
 --------------
 
 *Copyright (c) 2019-2021, Arm Limited. All rights reserved.*
