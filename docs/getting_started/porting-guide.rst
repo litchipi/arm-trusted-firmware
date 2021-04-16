@@ -894,6 +894,21 @@ On success the function should return 0 and a negative error code otherwise.
 Note that this API depends on ``DECRYPTION_SUPPORT`` build flag which is
 marked as experimental.
 
+Function : plat_is_trial_run() [when PSA_FWU_SUPPORT == 1]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    Argument : void
+    Return   : bool
+
+This function is mandatory when PSA_FWU_SUPPORT is enabled, and
+it detects whether the system is running in a trial run or regular run
+state.
+
+It returns 'true' if the system running in a trial run and 'false' if
+the system is running in a regular run.
+
 Common optional modifications
 -----------------------------
 
