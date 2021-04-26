@@ -349,4 +349,10 @@ int32_t plat_get_soc_revision(void);
  */
 int32_t plat_is_smccc_feature_available(u_register_t fid);
 
+/*
+ * Function to check whether the system is running in trial run or regular
+ * run state.
+ */
+bool plat_is_trial_run(void);
+
 #endif /* PLATFORM_H */

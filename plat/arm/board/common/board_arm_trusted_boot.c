@@ -13,6 +13,7 @@
 #include <drivers/delay_timer.h>
 #include <lib/cassert.h>
 #include <lib/fconf/fconf.h>
+#include <plat/arm/common/arm_fwu_metadata.h>
 #include <plat/arm/common/plat_arm.h>
 #include <plat/arm/common/fconf_nv_cntr_getter.h>
 #include <plat/common/common_def.h>
@@ -224,4 +225,14 @@ int plat_get_nv_ctr(void *cookie, unsigned int *nv_ctr)
 int plat_set_nv_ctr(void *cookie, unsigned int nv_ctr)
 {
 	return 1;
+}
+
+/*
+ * Return if the system is running in trial run or regular run state
+ * true -> trial run
+ * false -> regular run
+ */
+bool plat_is_trial_run(void)
+{
+	return arm_is_trial_run_state();
 }

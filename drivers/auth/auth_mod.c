@@ -242,6 +242,7 @@ static int auth_nvctr(const auth_method_param_nv_ctr_t *param,
 	unsigned int data_len, len, i;
 	unsigned int plat_nv_ctr;
 	int rc = 0;
+	bool trial_run = false;
 
 	/* Get the counter value from current image. The AM expects the IPM
 	 * to return the counter value as a DER encoded integer */
@@ -284,7 +285,12 @@ static int auth_nvctr(const auth_method_param_nv_ctr_t *param,
 		/* Invalid NV-counter */
 		return 1;
 	} else if (*cert_nv_ctr > plat_nv_ctr) {
-		*need_nv_ctr_upgrade = true;
+#if PSA_FWU_SUPPORT && IMAGE_BL2
+		trial_run = plat_is_trial_run();
+#endif /* PSA_FWU_SUPPORT && IMAGE_BL2 */
+		if (!trial_run) {
+			*need_nv_ctr_upgrade = true;
+		}
 	}
 
 	return 0;
