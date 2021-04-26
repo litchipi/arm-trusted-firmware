@@ -22,6 +22,7 @@
 #endif
 #include <lib/utils.h>
 #include <plat/arm/common/plat_arm.h>
+#include <plat/arm/common/arm_fwu_metadata.h>
 #include <plat/common/platform.h>
 
 /* Data structure which holds the extents of the trusted SRAM for BL2 */
@@ -77,6 +78,19 @@ void arm_bl2_early_platform_setup(uintptr_t fw_config,
 	partition_init(GPT_IMAGE_ID);
 #endif /* ARM_GPT_SUPPORT */
 
+	/* Load FWU metadata which will be used to load proper FIP */
+#if PSA_FWU_SUPPORT
+	int result = arm_load_fwu_metadata("FWU-Metadata");
+
+	if (result != 0) {
+		WARN("loading of FWU-Metadata failed, using Bkup-FWU-Metadata\n");
+		result = arm_load_fwu_metadata("Bkup-FWU-Metadata");
+		if (result != 0) {
+			ERROR("loading of Bkup-FWU-Metadata failed\n");
+			panic();
+		}
+	}
+#endif /* PSA_FWU_SUPPORT */
 }
 
 void bl2_early_platform_setup2(u_register_t arg0, u_register_t arg1, u_register_t arg2, u_register_t arg3)
