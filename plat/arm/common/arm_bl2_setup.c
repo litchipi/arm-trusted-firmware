@@ -109,11 +109,7 @@ void bl2_plat_preload_setup(void)
 	arm_bl2_dyn_cfg_init();
 
 #if ARM_GPT_SUPPORT
-	int result = arm_set_image_source(FIP_IMAGE_ID, "FIP_A");
-
-	if (result != 0) {
-		panic();
-	}
+	arm_set_fip_addr();
 #endif /* ARM_GPT_SUPPORT */
 }
 

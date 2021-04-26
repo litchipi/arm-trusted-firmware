@@ -154,6 +154,7 @@ int arm_io_setup(void);
 
 /* Set image specification in IO block policy */
 int arm_set_image_source(unsigned int image_id, const char *part_name);
+void arm_set_fip_addr(void);
 
 /* Security utility functions */
 void arm_tzc400_setup(uintptr_t tzc_base,
