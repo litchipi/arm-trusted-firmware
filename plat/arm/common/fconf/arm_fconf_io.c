@@ -31,6 +31,11 @@ io_block_spec_t fip_block_spec = {
 	.length = PLAT_ARM_FLASH_IMAGE_MAX_SIZE
 };
 
+#if PSA_FWU_SUPPORT
+/* metadata entry details */
+static io_block_spec_t fwu_metadata_spec;
+#endif /* PSA_FWU_SUPPORT */
+
 #if ARM_GPT_SUPPORT
 static const io_block_spec_t gpt_spec = {
 	.offset         = PLAT_ARM_FLASH_IMAGE_BASE,
@@ -92,6 +97,14 @@ struct plat_io_policy policies[MAX_NUMBER_IDS] = {
 		open_memmap
 	},
 #endif /* ARM_GPT_SUPPORT */
+#if PSA_FWU_SUPPORT
+	[FWU_METADATA_IMAGE_ID] = {
+		&memmap_dev_handle,
+		/* filled runtime from partition information */
+		(uintptr_t)&fwu_metadata_spec,
+		open_memmap
+	},
+#endif /* PSA_FWU_SUPPORT */
 	[FIP_IMAGE_ID] = {
 		&memmap_dev_handle,
 		(uintptr_t)&fip_block_spec,
